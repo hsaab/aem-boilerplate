@@ -74,7 +74,7 @@ The repository provides the basic structure, blocks, and configuration needed to
 
 CMS authored content is a key part of every AEM Website. The content of a page is broken into sections. Sections can have default content (text, headings, links, etc.) as well as content in blocks.
 
-If no authored content exists to test against, you can create static HTML files in a `drafts/` folder at the project root. Pass `--html-folder drafts` when starting the dev server. Follow the aem markup structure and save files with `.html` or `.plain.html` extensions.
+If no authored content exists to test against, you can create static HTML files in a `drafts/` folder at the project root. Pass `--html-folder drafts` when starting the dev server. Save files with `.plain.html` extension containing only the section `<div>` elements (no `<html>`/`<head>`/`<body>` wrappers -- the CLI adds those automatically). Access the page at `http://localhost:3000/drafts/{filename-without-extension}` -- the URL **must** include the `/drafts/` prefix to match the html-folder handler.
 
 Background on content and markup structure can be found at https://www.aem.live/developer/markup-sections-blocks and https://www.aem.live/developer/markup-reference respectively.
 

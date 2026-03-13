@@ -1,0 +1,64 @@
+---
+description: Block development workflow for AEM Edge Delivery Services blocks
+globs: blocks/**
+alwaysApply: false
+---
+
+# Block Development Workflow
+
+When building a new block, follow these steps in order.
+
+## 1. Define the Content Structure
+
+Decide the authoring contract before writing code. Each row in the authored table becomes a child `<div>` of the block. Each cell becomes a nested `<div>`.
+
+Inspect existing content with `curl http://localhost:3000/path.plain.html` or `console.log(block.innerHTML)` to verify assumptions.
+
+## 2. Create Block Files
+
+Create `blocks/{name}/{name}.js` and `blocks/{name}/{name}.css`.
+
+**JavaScript pattern:**
+
+```js
+import { toClassName } from '../../scripts/aem.js';
+
+export default function decorate(block) {
+  // 1. Extract data from block.children rows/cells
+  // 2. Build new DOM structure with semantic HTML and ARIA attributes
+  // 3. Replace or prepend into block
+  // 4. Add event listeners
+}
+```
+
+**CSS rules:**
+- Scope all selectors to `.{blockname}` (e.g. `.tabs .tabs-list`)
+- Mobile-first: base styles for mobile, `@media (width >= 600px)` and `(width >= 900px)` for larger
+- Use project CSS custom properties (`--background-color`, `--text-color`, `--dark-color`, `--light-color`, `--link-color`, `--body-font-size-*`)
+- Never use `{blockname}-container` or `{blockname}-wrapper` class names
+
+## 3. Create Test Content
+
+Create `drafts/{name}-test.plain.html` containing only section `<div>` elements (no `<html>`, `<head>`, `<body>`, or `<main>` wrappers). The AEM CLI wraps this content automatically.
+
+```html
+<div>
+  <h2>Heading for the section</h2>
+</div>
+<div>
+  <div class="{blockname}">
+    <div>
+      <div>Cell 1</div>
+      <div>Cell 2</div>
+    </div>
+  </div>
+</div>
+```
+
+Start the dev server with `--html-folder drafts` and access at `http://localhost:3000/drafts/{name}-test`. The URL **must** include the `/drafts/` prefix.
+
+## 4. Validate
+
+- Run `npm run lint` (ESLint + Stylelint must pass)
+- Test in browser: visual rendering, click interactions, keyboard navigation
+- Verify accessibility: ARIA roles, focus management, screen reader labels
