@@ -5,23 +5,37 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 400px;
+  padding: 48px 24px;
+  overflow: hidden;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* gradient overlay for text legibility */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgb(0 0 0 / 65%) 0%,
+    rgb(0 0 0 / 30%) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero picture {
   position: absolute;
   z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
 }
 
 .hero img {
@@ -30,8 +44,59 @@
   height: 100%;
 }
 
+.hero h1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  color: var(--background-color);
+  text-shadow: 0 2px 8px rgb(0 0 0 / 40%);
+}
+
+.hero p {
+  max-width: 1200px;
+  margin: 0.6em auto 0;
+  width: 100%;
+  color: rgb(255 255 255 / 90%);
+  font-size: var(--body-font-size-m);
+  text-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+}
+
+.hero .button-wrapper {
+  margin-top: 1.2em;
+}
+
+.hero a.button:any-link {
+  border-color: var(--background-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.hero a.button:hover,
+.hero a.button:focus-visible {
+  border-color: var(--light-color);
+  background-color: var(--light-color);
+}
+
+.hero a.button.secondary:any-link {
+  border-color: var(--background-color);
+  background-color: transparent;
+  color: var(--background-color);
+}
+
+.hero a.button.secondary:hover,
+.hero a.button.secondary:focus-visible {
+  background-color: rgb(255 255 255 / 15%);
+}
+
+@media (width >= 600px) {
+  .hero {
+    min-height: 440px;
+  }
+}
+
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 480px;
+    padding: 64px 32px;
   }
 }
