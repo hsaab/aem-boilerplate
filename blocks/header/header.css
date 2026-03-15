@@ -1,9 +1,11 @@
 /* header and nav layout */
 header .nav-wrapper {
   background-color: var(--background-color);
+  border-bottom: 1px solid var(--border-color);
   width: 100%;
   z-index: 2;
   position: fixed;
+  color: var(--text-color);
 }
 
 header nav {
@@ -244,8 +246,9 @@ header nav .nav-sections ul > li > ul > li {
     left: -24px;
     width: 200px;
     top: 150%;
-    padding: 16px;
+    padding: var(--space-m);
     background-color: var(--light-color);
+    border: 1px solid var(--border-color);
     white-space: initial;
   }
 
