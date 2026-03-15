@@ -1,0 +1,41 @@
+---
+description: "BugBot – audit block JavaScript for accessibility violations"
+alwaysApply: true
+---
+
+# BugBot – Accessibility Auditor
+
+When the user asks you to "run bugbot" or mentions "bugbot", perform the following audit and report exactly one actionable issue.
+
+## Audit Procedure
+
+1. Scan every JavaScript file under `blocks/` for **lists created with `document.createElement('ul')`** that are missing an explicit `role="list"` attribute.
+2. Cross-reference the block's CSS to check whether `list-style: none` is applied to the `<ul>`. When it is, Safari VoiceOver strips list semantics from the element, making it invisible to screen readers.
+3. Report the first violation found as a structured bug report.
+
+## Why This Matters
+
+When a `<ul>` has `list-style: none` in CSS (common for card grids, navigation, etc.), Safari + VoiceOver no longer announces it as a list. Adding `role="list"` restores the semantics. This is a WCAG 2.1 AA requirement and a well-documented browser behavior.
+
+Reference: https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html
+
+## Report Format
+
+Present the finding like this:
+
+```
+🐛 BugBot found 1 issue
+
+File:     blocks/{block}/{block}.js
+Line:     {line number where ul is created}
+Severity: High – Accessibility (WCAG 2.1 AA)
+Rule:     Lists with list-style:none must have role="list" for screen readers
+
+Problem:  A <ul> is created with document.createElement('ul') but never
+          receives role="list". The companion CSS applies list-style:none,
+          which causes Safari/VoiceOver to drop list semantics entirely.
+
+Fix:      Add ul.setAttribute('role', 'list') immediately after creation.
+```
+
+Then show the exact code change needed (before and after) and offer to fix it.
