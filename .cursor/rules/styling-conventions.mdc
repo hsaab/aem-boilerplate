@@ -1,0 +1,49 @@
+---
+description: Visual design conventions – always-dark Adobe Red palette, fonts, hero patterns
+globs: "styles/**/*.css,blocks/**/*.css"
+alwaysApply: false
+---
+
+# Styling Conventions
+
+## Color Palette (Always Dark, Adobe Red)
+
+The site uses a dark background by default — there is no light mode. All colors are CSS custom properties in `styles/styles.css` `:root`. Never hard-code hex values in block CSS — always reference variables:
+
+- `--background-color: #1b1b1b` — page background (dark)
+- `--light-color: #252525` — subtle section backgrounds (slightly lighter dark)
+- `--text-color: #e1e1e1` — body text (light grey)
+- `--dark-color: #b3b3b3` — secondary/muted text (medium grey)
+- `--link-color: #eb1000` (Adobe Red) — links, primary buttons, accent highlights
+- `--link-hover-color: #ff4d3d` — hover states (brighter red)
+- `--accent-color: #ff3d2e` — high-impact CTAs (bright red)
+- `--border-color: #3a3a3a` — dividers, card borders (dark grey)
+
+The palette is strictly red, black, grey, and white. No blue. No `prefers-color-scheme` media queries — the site is always dark.
+
+## Typography
+
+- **Body**: `--body-font-family` = Source Sans 3 (self-hosted woff2 in `fonts/`)
+- **Headings**: `--heading-font-family` = Source Serif 4 (self-hosted woff2 in `fonts/`)
+- Always use the `--body-font-size-*` and `--heading-font-size-*` variables, never raw pixel values for text
+- Headings use `font-weight: 700` and `letter-spacing: -0.01em`
+
+## Hero Block Pattern
+
+The hero uses these visual conventions for maximum impact:
+
+- Minimum heights: 400px (mobile), 500px (tablet), 600px (desktop)
+- Background image with Ken Burns zoom (`transform: scale(1.06)` on load)
+- Cinematic gradient overlay: heavier on the left, transparent on the right
+- Red accent bar (4px tall, `--link-color`) above the `h1` via `::before`
+- Text entrance animation (`hero-fade-up` keyframes in `blocks/hero/hero.css`)
+- CTA buttons: filled Adobe Red, not ghost/outline
+
+## Spacing
+
+Use the spacing scale variables instead of ad-hoc pixel values:
+
+```
+--space-xs: 4px   --space-s: 8px    --space-m: 16px
+--space-l: 24px   --space-xl: 40px  --space-xxl: 64px  --space-xxxl: 96px
+```
