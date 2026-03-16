@@ -1,0 +1,48 @@
+.quote blockquote {
+  margin: 0;
+  padding: 16px 0 16px 24px;
+  border-left: 4px solid var(--link-color);
+}
+
+.quote .quote-content p {
+  margin: 0 0 16px;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-style: italic;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.quote .quote-content p:last-of-type {
+  margin-bottom: 0;
+}
+
+.quote .quote-attribution {
+  margin-top: 8px;
+}
+
+.quote .quote-attribution cite {
+  font-style: normal;
+  font-size: var(--body-font-size-s);
+  color: var(--dark-color);
+}
+
+@media (width >= 600px) {
+  .quote blockquote {
+    padding: 24px 0 24px 32px;
+  }
+
+  .quote .quote-content p {
+    font-size: var(--body-font-size-m);
+  }
+}
+
+@media (width >= 900px) {
+  .quote blockquote {
+    padding: 32px 0 32px 40px;
+  }
+
+  .quote .quote-content p {
+    font-size: var(--heading-font-size-xs);
+  }
+}
