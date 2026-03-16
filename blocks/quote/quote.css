@@ -1,0 +1,50 @@
+.quote blockquote {
+  margin: 0 auto;
+  padding: 0 24px;
+  max-width: 900px;
+}
+
+@media (width >= 600px) {
+  .quote blockquote {
+    padding: 0 28px;
+  }
+}
+
+@media (width >= 900px) {
+  .quote blockquote {
+    padding: 0 32px;
+  }
+}
+
+.quote blockquote .quote-quotation {
+  font-size: 120%;
+  color: var(--text-color);
+}
+
+.quote blockquote .quote-quotation > :first-child {
+  text-indent: -0.5ch;
+}
+
+.quote blockquote .quote-quotation > :first-child::before,
+.quote blockquote .quote-quotation > :last-child::after {
+  line-height: 0;
+}
+
+.quote blockquote .quote-quotation > :first-child::before {
+  content: "\201C";
+}
+
+.quote blockquote .quote-quotation > :last-child::after {
+  content: "\201D";
+}
+
+.quote blockquote .quote-attribution {
+  text-align: right;
+  color: var(--dark-color);
+  font-size: var(--body-font-size-s);
+}
+
+.quote blockquote .quote-attribution > :first-child::before {
+  content: "—";
+  padding-right: 0.5ch;
+}

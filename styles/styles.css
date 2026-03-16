@@ -11,17 +11,29 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* colors - Adobe Red dark palette */
+  --background-color: #1b1b1b;
+  --light-color: #252525;
+  --dark-color: #b3b3b3;
+  --text-color: #e1e1e1;
+  --link-color: #eb1000;
+  --link-hover-color: #ff4d3d;
+  --accent-color: #ff3d2e;
+  --border-color: #3a3a3a;
+  --button-text-on-accent: #fff;
+
+  /* spacing scale */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 40px;
+  --space-xxl: 64px;
+  --space-xxxl: 96px;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: "Source Sans 3", source-sans-3-fallback, sans-serif;
+  --heading-font-family: "Source Serif 4", source-serif-4-fallback, serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -42,15 +54,15 @@
 
 /* fallback fonts */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
+  font-family: "source-sans-3-fallback";
+  size-adjust: 99.5%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
+  font-family: "source-serif-4-fallback";
+  size-adjust: 94%;
+  src: local('Georgia');
 }
 
 @media (width >= 900px) {
@@ -107,7 +119,8 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.25;
   scroll-margin: 40px;
 }
@@ -135,8 +148,9 @@ pre {
 }
 
 pre {
-  padding: 16px;
+  padding: var(--space-m);
   border-radius: 8px;
+  border: 1px solid var(--border-color);
   background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
@@ -256,7 +270,7 @@ a.button.accent,
 button.button.accent {
   border-color: var(--link-color);
   background-color: var(--link-color);
-  color: var(--background-color);
+  color: var(--button-text-on-accent);
 }
 
 a.button.accent:hover,
