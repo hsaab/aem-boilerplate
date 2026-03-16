@@ -1,0 +1,45 @@
+.quote blockquote {
+  margin: 0;
+  padding: var(--space-m) var(--space-m) var(--space-m) var(--space-l);
+  border-left: 4px solid var(--link-color);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-m);
+  font-style: italic;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.quote blockquote cite {
+  display: block;
+  margin-top: var(--space-m);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-style: normal;
+  color: var(--dark-color);
+}
+
+.quote blockquote a {
+  color: var(--link-color);
+}
+
+.quote blockquote a:hover {
+  color: var(--link-hover-color);
+}
+
+@media (width >= 600px) {
+  .quote blockquote {
+    padding-left: var(--space-xl);
+    font-size: var(--body-font-size-m);
+  }
+}
+
+@media (width >= 900px) {
+  .quote blockquote {
+    padding: var(--space-l) var(--space-xl) var(--space-l) var(--space-xxl);
+    font-size: var(--heading-font-size-s);
+  }
+
+  .quote blockquote cite {
+    font-size: var(--body-font-size-m);
+  }
+}
