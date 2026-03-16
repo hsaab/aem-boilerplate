@@ -1,0 +1,12 @@
+---
+description: Never edit Cursor rules or project config unless explicitly requested
+alwaysApply: true
+---
+
+# Do Not Edit Rules
+
+**Never modify files in `.cursor/rules/`** (e.g. `styling-conventions.mdc`, `block-development.mdc`, `bugbot.mdc`, etc.) unless the user explicitly asks you to change them.
+
+These files are project conventions and documentation maintained by the team. Do not update them as a side effect of implementing features, fixing bugs, or aligning with external standards—even when a plan or task suggests doing so.
+
+Only edit `.cursor/rules/*.mdc` when the user directly requests it (e.g. "update the styling conventions" or "change the block development rule").
