@@ -1,0 +1,40 @@
+.quote {
+  margin: var(--space-l, 24px) 0;
+}
+
+.quote .quote-blockquote {
+  margin: 0;
+  padding: var(--space-m, 16px) var(--space-l, 24px);
+  border-left: 4px solid var(--link-color);
+  background-color: var(--light-color);
+  font-size: var(--body-font-size-m);
+  font-style: italic;
+}
+
+.quote .quote-blockquote p {
+  margin: 0 0 var(--space-s, 8px);
+}
+
+.quote .quote-blockquote p:last-of-type {
+  margin-bottom: 0;
+}
+
+.quote .quote-blockquote cite {
+  display: block;
+  margin-top: var(--space-s, 8px);
+  font-size: var(--body-font-size-s);
+  font-style: normal;
+  color: var(--dark-color);
+}
+
+@media (width >= 600px) {
+  .quote .quote-blockquote {
+    padding: var(--space-l, 24px) var(--space-xl, 40px);
+  }
+}
+
+@media (width >= 900px) {
+  .quote .quote-blockquote {
+    padding: var(--space-xl, 40px) var(--space-xxl, 64px);
+  }
+}

@@ -11,17 +11,28 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* colors - always dark, Adobe Red palette */
+  --background-color: #1b1b1b;
+  --light-color: #252525;
+  --text-color: #e1e1e1;
+  --dark-color: #b3b3b3;
+  --link-color: #eb1000;
+  --link-hover-color: #ff4d3d;
+  --accent-color: #ff3d2e;
+  --border-color: #3a3a3a;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: source-sans-3, source-sans-3-fallback, sans-serif;
+  --heading-font-family: source-serif-4, source-serif-4-fallback, serif;
+
+  /* spacing scale */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 40px;
+  --space-xxl: 64px;
+  --space-xxxl: 96px;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -38,19 +49,6 @@
 
   /* nav height */
   --nav-height: 64px;
-}
-
-/* fallback fonts */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
 }
 
 @media (width >= 900px) {
@@ -107,9 +105,10 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.25;
-  scroll-margin: 40px;
+  scroll-margin: var(--space-xl);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -135,7 +134,7 @@ pre {
 }
 
 pre {
-  padding: 16px;
+  padding: var(--space-m);
   border-radius: 8px;
   background-color: var(--light-color);
   overflow-x: auto;
@@ -143,7 +142,7 @@ pre {
 }
 
 main > div {
-  margin: 40px 16px;
+  margin: var(--space-xl) var(--space-m);
 }
 
 input,
@@ -167,7 +166,7 @@ a:hover {
 
 /* buttons */
 p.button-wrapper {
-  margin: 12px 0;
+  margin: var(--space-m) 0;
 }
 
 a.button:any-link,
@@ -297,13 +296,13 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: var(--space-xl) 0;
 }
 
 main > .section > div {
   max-width: 1200px;
   margin: auto;
-  padding: 0 24px;
+  padding: 0 var(--space-l);
 }
 
 main > .section:first-of-type {
@@ -312,7 +311,7 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 32px;
+    padding: 0 var(--space-xl);
   }
 }
 
@@ -321,5 +320,5 @@ main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
-  padding: 40px 0;
+  padding: var(--space-xl) 0;
 }
