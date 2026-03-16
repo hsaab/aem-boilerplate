@@ -1,9 +1,11 @@
 {
   "name": "@adobe/aem-boilerplate",
+  "type": "module",
   "private": true,
   "version": "1.3.0",
   "description": "Starter project for Adobe Helix",
   "scripts": {
+    "test": "node blocks/quote/quote.test.mjs",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",
     "lint": "npm run lint:js && npm run lint:css",
@@ -24,6 +26,7 @@
     "eslint": "8.57.1",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-plugin-import": "2.32.0",
+    "jsdom": "^24.1.3",
     "stylelint": "17.4.0",
     "stylelint-config-standard": "40.0.0"
   }

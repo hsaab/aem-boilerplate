@@ -60,6 +60,7 @@ Start the dev server with `--html-folder drafts` and access at `http://localhost
 
 ## 4. Validate
 
+- Write some quick unit tests and link to them
 - Run `npm run lint` (ESLint + Stylelint must pass)
 - Test in browser: visual rendering, click interactions, keyboard navigation
 - Verify accessibility: ARIA roles, focus management, screen reader labels
