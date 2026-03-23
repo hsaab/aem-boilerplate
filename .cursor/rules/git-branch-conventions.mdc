@@ -1,0 +1,22 @@
+---
+description: Short Git branch names for AEM CLI and preview URLs
+alwaysApply: true
+---
+
+# Git branch names (keep them short)
+
+## Why
+
+`@adobe/aem-cli` (`aem up`) derives a preview hostname from **branch name**, **repository**, and **owner**. A single DNS label may be at most **63 characters**. Overlong branch names cause `aem up` to fail with a “branch name too long” / DNS label error, so **local development stops working**.
+
+## Rules for agents and contributors
+
+- Prefer **short, descriptive** branch names—typically **under ~40 characters** for the branch slug, and always short enough that the CLI starts cleanly.
+- Good patterns: `feat/quote-block`, `fix/header-nav`, `hsa-5-quote`, `issue-123-tabs` (ticket or issue id + brief slug).
+- If **Linear, Jira, or another tool** suggests a long auto-generated branch name, **use a shortened local branch** that still ties to the ticket (e.g. `HSA-5` → `hsa-5-quote` or `feat/hsa-5-quote`) so `aem up` works. Link the real ticket in the PR description instead of encoding the full title in the branch.
+- Avoid repeating org, repo, or full sentence-length descriptions in the branch string.
+- When starting or troubleshooting the dev server, if `aem up` fails on branch length, **rename the branch to a shorter name** (or create a short-lived local branch) rather than fighting the CLI.
+
+## Related
+
+- Local dev: `npx @adobe/aem-cli up` (see [AGENTS.md](AGENTS.md)).
