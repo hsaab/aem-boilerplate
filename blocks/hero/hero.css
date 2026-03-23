@@ -1,3 +1,25 @@
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
@@ -5,22 +27,31 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  overflow: hidden;
+  padding: var(--space-xl) var(--space-l);
+  min-height: 400px;
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* Cinematic gradient — heavier on the left for headline legibility */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgb(0 0 0 / 78%) 0%,
+    rgb(0 0 0 / 48%) 42%,
+    rgb(0 0 0 / 12%) 100%
+  );
 }
 
 .hero picture {
   position: absolute;
   z-index: -1;
   inset: 0;
-  object-fit: cover;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -28,10 +59,88 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+  transform: scale(1);
+  transform-origin: center center;
+}
+
+.hero.hero-loaded img {
+  animation: hero-zoom 24s ease-out forwards;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--space-m);
+  color: var(--text-color);
+  opacity: 0;
+}
+
+.hero h1::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(120px, 30vw);
+  height: 4px;
+  background-color: var(--link-color);
+}
+
+.hero.hero-loaded h1 {
+  animation: hero-fade-up 0.85s ease forwards;
+}
+
+.hero > p,
+.hero > div {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+
+.hero.hero-loaded > p,
+.hero.hero-loaded > div {
+  animation: hero-fade-up 0.85s ease 0.12s forwards;
+}
+
+.hero .button-wrapper {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+
+.hero.hero-loaded .button-wrapper {
+  animation: hero-fade-up 0.85s ease 0.2s forwards;
+}
+
+/* Hero CTAs: filled Adobe Red */
+.hero a.button:any-link,
+.hero button.button {
+  border-color: var(--link-color);
+  background-color: var(--link-color);
+  color: var(--background-color);
+}
+
+.hero a.button:hover,
+.hero a.button:focus-visible,
+.hero button.button:hover,
+.hero button.button:focus-visible {
+  border-color: var(--link-hover-color);
+  background-color: var(--link-hover-color);
+  color: var(--background-color);
+}
+
+@media (width >= 600px) {
+  .hero {
+    min-height: 500px;
+  }
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 600px;
+    padding: var(--space-xl) 32px;
   }
 }

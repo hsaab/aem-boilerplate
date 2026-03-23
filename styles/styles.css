@@ -11,17 +11,28 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* colors — always-dark Adobe Red palette */
+  --background-color: #1b1b1b;
+  --light-color: #252525;
+  --dark-color: #b3b3b3;
+  --text-color: #e1e1e1;
+  --link-color: #eb1000;
+  --link-hover-color: #ff4d3d;
+  --accent-color: #ff3d2e;
+  --border-color: #3a3a3a;
+
+  /* spacing scale */
+  --space-xs: 4px;
+  --space-s: 8px;
+  --space-m: 16px;
+  --space-l: 24px;
+  --space-xl: 40px;
+  --space-xxl: 64px;
+  --space-xxxl: 96px;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'source-sans-3', 'source-sans-3-fallback', sans-serif;
+  --heading-font-family: 'source-serif-4', 'source-serif-4-fallback', serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -40,16 +51,16 @@
   --nav-height: 64px;
 }
 
-/* fallback fonts */
+/* fallback fonts — reduce layout shift before webfonts load */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
+  font-family: 'source-serif-4-fallback';
+  size-adjust: 95%;
+  src: local('Georgia');
 }
 
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
+  font-family: 'source-sans-3-fallback';
+  size-adjust: 100%;
   src: local('Arial');
 }
 
@@ -107,7 +118,8 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1.25;
   scroll-margin: 40px;
 }

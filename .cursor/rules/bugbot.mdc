@@ -1,30 +1,65 @@
 ---
-description: "BugBot – audit block JavaScript for accessibility violations"
+description: "BugBot – audit block JavaScript for security and accessibility issues"
 alwaysApply: true
 ---
 
-# BugBot – Accessibility Auditor
+# BugBot – Block Auditor (Security + Accessibility)
 
-When the user asks you to "run bugbot" or mentions "bugbot", perform the following audit and report exactly one actionable issue.
+When the user asks you to "run bugbot" or mentions "bugbot", perform the audits below and report **exactly one** actionable issue.
+
+**Issue selection:** Scan in order. First, apply **Security** to all JavaScript under `blocks/`. If you find any finding that matches the skill’s checklist, report the **first** such finding (in filesystem / path order). If **no** security issues apply, run **Accessibility** and report the **first** violation there.
 
 ## Audit Procedure
 
+### 1. Security (blocks JavaScript)
+
+Use **[.cursor/skills/security-standards/SKILL.md](.cursor/skills/security-standards/SKILL.md)** as the source of truth. For each file under `blocks/**/*.js`, apply that skill’s **Vulnerability Checklist**:
+
+- Cross-Site Scripting (XSS) — `innerHTML` / unsafe sinks, `data-*` misuse
+- Unsafe `fetch` patterns — error handling, response validation, token exposure
+- Prototype pollution — `Object.assign`, dynamic keys, maps
+- Open redirects — `window.location`, `href` from untrusted input
+- Session / token exposure — storage, logging, URLs, error leakage
+- DOM clobbering — IDs, `getElementById` with author-controlled values
+
+Use the skill’s **Severity Classification** and **Output Format** when reporting a security finding.
+
+### 2. Accessibility (lists)
+
 1. Scan every JavaScript file under `blocks/` for **lists created with `document.createElement('ul')`** that are missing an explicit `role="list"` attribute.
-2. Cross-reference the block's CSS to check whether `list-style: none` is applied to the `<ul>`. When it is, Safari VoiceOver strips list semantics from the element, making it invisible to screen readers.
-3. Report the first violation found as a structured bug report.
+2. Cross-reference the block’s CSS to check whether `list-style: none` is applied to the `<ul>`. When it is, Safari VoiceOver strips list semantics from the element, making it invisible to screen readers.
+3. Report the first violation found (only if step 1 found no security issues to report).
 
 ## Why This Matters
 
-When a `<ul>` has `list-style: none` in CSS (common for card grids, navigation, etc.), Safari + VoiceOver no longer announces it as a list. Adding `role="list"` restores the semantics. This is a WCAG 2.1 AA requirement and a well-documented browser behavior.
+**Security:** Client-side code is public; unsafe DOM or network patterns can lead to XSS, data leaks, or abuse. The skill documents Edge Delivery–specific expectations.
+
+**Accessibility:** When a `<ul>` has `list-style: none` in CSS (common for card grids, navigation, etc.), Safari + VoiceOver no longer announces it as a list. Adding `role="list"` restores the semantics. This is a WCAG 2.1 AA requirement and a well-documented browser behavior.
 
 Reference: https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html
 
 ## Report Format
 
+### Security finding
+
+Use the format from **Output Format** in `.cursor/skills/security-standards/SKILL.md` (severity emoji, level, file, line, description, fix).
+
+Prefix the report with a short BugBot line, for example:
+
+```
+🐛 BugBot found 1 issue (security)
+
+🔴 [HIGH] — XSS
+File: blocks/...
+...
+```
+
+### Accessibility finding
+
 Present the finding like this:
 
 ```
-🐛 BugBot found 1 issue
+🐛 BugBot found 1 issue (accessibility)
 
 File:     blocks/{block}/{block}.js
 Line:     {line number where ul is created}
