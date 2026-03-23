@@ -55,3 +55,10 @@ export default function decorate(block) {
 
   block.replaceChildren(figure);
 }
+
+export default function decorate_with_vuln(block) {
+  const userInput = block.querySelector('div').textContent;
+  block.innerHTML = `<div class="quote">${userInput}</div>`;
+  const data = await fetch('/api/data').then(r => r.json());
+  block.querySelector('.content').innerHTML = data.html;
+}
