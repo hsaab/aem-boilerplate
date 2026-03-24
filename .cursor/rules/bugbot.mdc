@@ -1,41 +1,50 @@
 ---
-description: "BugBot – audit block JavaScript for accessibility violations"
+description: "BugBot – audit block JavaScript for security vulnerabilities"
 alwaysApply: true
 ---
 
-# BugBot – Accessibility Auditor
+# BugBot – Security Auditor
 
-When the user asks you to "run bugbot" or mentions "bugbot", perform the following audit and report exactly one actionable issue.
+When the user asks you to "run bugbot" or mentions "bugbot", perform a security audit of the codebase.
 
-## Audit Procedure
+## Step 1 — Load the Security Standards Skill
 
-1. Scan every JavaScript file under `blocks/` for **lists created with `document.createElement('ul')`** that are missing an explicit `role="list"` attribute.
-2. Cross-reference the block's CSS to check whether `list-style: none` is applied to the `<ul>`. When it is, Safari VoiceOver strips list semantics from the element, making it invisible to screen readers.
-3. Report the first violation found as a structured bug report.
+Read the security-standards skill at `.cursor/skills/security-standards/SKILL.md` and follow its full vulnerability checklist.
 
-## Why This Matters
+## Step 2 — Audit
 
-When a `<ul>` has `list-style: none` in CSS (common for card grids, navigation, etc.), Safari + VoiceOver no longer announces it as a list. Adding `role="list"` restores the semantics. This is a WCAG 2.1 AA requirement and a well-documented browser behavior.
+1. Examine all JavaScript files under `blocks/` and `scripts/` (except `scripts/aem.js`, which must never be modified).
+2. Check each file against the skill's vulnerability categories:
+   - **XSS** — `innerHTML` with user-supplied or external data
+   - **Unsafe Fetch** — `fetch()` calls missing try/catch or response validation
+   - **Prototype Pollution** — `Object.assign` with unsanitized external data
+   - **Open Redirects** — unvalidated URLs in `window.location` or `<a href>`
+   - **Token Exposure** — secrets in `localStorage`, console logs, or URL params
+   - **DOM Clobbering** — non-namespaced IDs vulnerable to author-controlled content
+3. Classify each finding as HIGH, MEDIUM, or LOW per the skill's severity table.
+4. Don't flag false positives. If a pattern looks safe, skip it.
+5. Prioritize HIGH severity findings in the summary.
 
-Reference: https://www.scottohara.me/blog/2019/01/12/lists-and-safari.html
+## Step 3 — Report
 
-## Report Format
-
-Present the finding like this:
+Present findings in a structured report:
 
 ```
-🐛 BugBot found 1 issue
+🐛 BugBot Security Audit
+=========================
+Files reviewed: {count}
+Findings: [HIGH: {n}, MEDIUM: {n}, LOW: {n}]
 
-File:     blocks/{block}/{block}.js
-Line:     {line number where ul is created}
-Severity: High – Accessibility (WCAG 2.1 AA)
-Rule:     Lists with list-style:none must have role="list" for screen readers
+[For each finding:]
 
-Problem:  A <ul> is created with document.createElement('ul') but never
-          receives role="list". The companion CSS applies list-style:none,
-          which causes Safari/VoiceOver to drop list semantics entirely.
+🔴/🟡/🟢 [HIGH/MEDIUM/LOW] — {vulnerability type}
 
-Fix:      Add ul.setAttribute('role', 'list') immediately after creation.
+File:        {path}
+Line:        {line number}
+Description: {what's wrong and why it's dangerous}
+Fix:         {specific code change}
 ```
 
-Then show the exact code change needed (before and after) and offer to fix it.
+If no issues are found, confirm the code passes review.
+
+After the report, show the exact code changes needed (before and after) for every finding and offer to apply them.
