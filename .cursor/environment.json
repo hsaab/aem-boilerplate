@@ -1,0 +1,17 @@
+{
+  "name": "AEM Edge Delivery Services",
+  "install": "npm install",
+  "ports": [
+    {
+      "name": "AEM dev server",
+      "port": 3000
+    }
+  ],
+  "terminals": [
+    {
+      "name": "aem-dev-server",
+      "command": "npx -y @adobe/aem-cli up --no-open --forward-browser-logs",
+      "description": "AEM Edge Delivery local dev server on http://localhost:3000. Serves local block/style/script code and proxies authored content from the *.aem.page preview backend (requires egress to aem.page/aem.live). For backend-independent local content, add `--html-folder drafts --html-mount /`."
+    }
+  ]
+}

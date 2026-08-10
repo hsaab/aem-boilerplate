@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cloud Agent Environment Smoke Test</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Local AEM Edge Delivery environment smoke test."/>
+  <script nonce="aem" src="/scripts/aem.js" type="module"></script>
+  <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
+  <link rel="stylesheet" href="/styles/styles.css"/>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div>
+      <h1>Cloud Agent Environment Smoke Test</h1>
+      <p>This page is served locally by the AEM dev server from the <code>drafts/</code>
+        folder, with no backend connection. It exercises the AEM Edge Delivery
+        block-decoration engine using only local code in this repository.</p>
+      <p><a href="https://www.aem.live/developer/tutorial">Read the developer tutorial</a></p>
+    </div>
+    <div>
+      <h2>Feature cards</h2>
+      <div class="cards">
+        <div>
+          <div>
+            <h3>Vanilla JavaScript</h3>
+            <p>ES6+ modules decorate server-rendered markup with no build step.</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h3>Modern CSS</h3>
+            <p>Grid, Flexbox, and custom properties, scoped per block.</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h3>Edge Delivery</h3>
+            <p>Content and code are composed at the edge for a perfect score.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>Two columns</h2>
+      <div class="columns">
+        <div>
+          <div>
+            <p>The columns block arranges default content into a responsive grid
+              that collapses to a single column on small screens.</p>
+          </div>
+          <div>
+            <p>Each column is authored as a table cell and decorated into a flex
+              layout by <code>columns.js</code>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+</body>
+</html>
