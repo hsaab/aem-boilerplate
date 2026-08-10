@@ -10,8 +10,8 @@
   "terminals": [
     {
       "name": "aem-dev-server",
-      "command": "npx -y @adobe/aem-cli up --no-open --forward-browser-logs",
-      "description": "AEM Edge Delivery local dev server on http://localhost:3000. Serves local block/style/script code and proxies authored content from the *.aem.page preview backend (requires egress to aem.page/aem.live). For backend-independent local content, add `--html-folder drafts --html-mount /`."
+      "command": "npx -y @adobe/aem-cli up --no-open --forward-browser-logs --html-folder drafts",
+      "description": "AEM Edge Delivery local dev server on http://localhost:3000. Serves local block/style/script code and proxies authored content from the *.aem.page preview backend (requires egress to aem.page/aem.live). Also serves backend-independent local HTML from drafts/ at http://localhost:3000/drafts/ (e.g. smoke test at /drafts/)."
     }
   ]
 }
